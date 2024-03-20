@@ -1,4 +1,4 @@
-# SauceDemo Task - Hybrid (BDD and DDT) Framework With Cucumber
+# Dg_Markt Task- Hybrid (BDD and DDT) Framework With Cucumber
 
 ### Codes And Tests Prepared By :
 Sükrü Yüksel
