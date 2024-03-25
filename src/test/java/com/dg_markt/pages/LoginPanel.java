@@ -23,7 +23,10 @@ public class LoginPanel extends BasePage{
         lognPanelPassword.sendKeys("2574dGlogin");
         BrowserUtils.waitFor(5);
         lognPanelLoginBtn.click();
+
+
         Driver.get().get(ConfigurationReader.get("url1"));
+       // register.click();
     }
 
 

@@ -23,9 +23,6 @@ public class Register {
      loginPanel.vorlogin();
 
 
-
-
-
     }
     @When("Der Benutzer klick continue, ohne die Pfilichtfelder auszufüllen")
     public void der_benutzer_klick_continue_ohne_die_pfilichtfelder_auszufüllen() {
@@ -51,5 +48,18 @@ public class Register {
         String expectedMessage="Your Account Has Been Created!";
         String actualMesssage=registerPage.createdMessage.getText();
         Assert.assertEquals(expectedMessage,actualMesssage);
+    }
+
+    @Then("Fehlermeldung  überprüfen")
+    public void fehlermeldungÜberprüfen(String expectedFehlermeldung) {
+        String actualFehlermeldung=registerPage.getDisapperingWarningMessage(expectedFehlermeldung);
+        System.out.println("actualFehlermeldung = " + actualFehlermeldung);
+        System.out.println("expectedFehlermeldung = " + expectedFehlermeldung);
+        Assert.assertEquals(expectedFehlermeldung,actualFehlermeldung);
+    }
+
+    @When("Der Benutzer gibt ungültige informationen wie folgendes {string} und {string} und {string} {string} und {string} und {string} und {string}")
+    public void derBenutzerGibtUngültigeInformationenWieFolgendesUndUndUndUndUnd(String firstName , String lastName , String eMail , String telephone , String password , String passwordConfirm) {
+ registerPage.listAusfüllen(firstName,lastName,eMail,telephone,password,passwordConfirm);
     }
 }

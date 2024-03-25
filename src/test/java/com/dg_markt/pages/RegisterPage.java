@@ -1,5 +1,6 @@
 package com.dg_markt.pages;
 
+import com.dg_markt.utilities.BrowserUtils;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -27,15 +28,51 @@ public class RegisterPage extends BasePage{
 
 
     public void listAusfüllen(String firstName,String lastName,String emailAdresse,String telefonnummer,
-    String passwort,String confirmPassword){
+    String password,String confirmPassword){
         firstNameinput.sendKeys(firstName);
+        BrowserUtils.waitForClickablility(firstNameinput,2);
         lastNameInput.sendKeys(lastName);
+        BrowserUtils.waitForClickablility(emailInput,2);
         emailInput.sendKeys(emailAdresse);
+        BrowserUtils.waitForClickablility(telefonnummerInput,2);
         telefonnummerInput.sendKeys(telefonnummer);
-        passwordInput.sendKeys(passwort);
-        passwordConfirmInput.sendKeys(passwort);
+        BrowserUtils.waitForClickablility(passwordInput,2);
+        passwordInput.sendKeys(password);
+        BrowserUtils.waitForClickablility(passwordConfirmInput,2);
+        passwordConfirmInput.sendKeys(confirmPassword);
+        BrowserUtils.waitForClickablility(checkbox,2);
         checkbox.click();
+        BrowserUtils.waitForClickablility(continueBtn,2);
         continueBtn.click();
+
+    }
+    public String getDisapperingWarningMessage(String message){
+        String  actualMessage=null;
+        if (message.contains("First")){
+            actualMessage=firstNameinput.getAttribute("validationMessage");
+            System.out.println(actualMessage);
+        }else if(message.contains("Last")){
+            actualMessage=lastNameInput.getText();
+            System.out.println(actualMessage);
+        }
+        if (message.contains("Mail")){
+            actualMessage=emailInput.getAttribute("validationMessage");
+            System.out.println(actualMessage);
+        }else if(message.contains("Telephone")){
+            actualMessage=telefonnummerInput.getText();
+            System.out.println(actualMessage);
+        }
+        else if(message.contains("Password")){
+            actualMessage=passwordInput.getText();
+            System.out.println(actualMessage);
+        }
+        else if(message.contains("Password")||message.contains("match")){
+            actualMessage=passwordConfirmInput.getText();
+            System.out.println(actualMessage);
+        }
+
+
+        return actualMessage;
 
     }
 
