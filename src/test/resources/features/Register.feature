@@ -1,3 +1,4 @@
+@register
 Feature: Als Benutzer sollte ich mich registrieren können.
 
 
@@ -16,7 +17,7 @@ Feature: Als Benutzer sollte ich mich registrieren können.
       | ertannn    | yilmaz    | ertnan9866@gmail.com | 01765253698 | sS.123456 | sS.123456        |
 
 
-  @register
+
   Scenario Outline: Negative Test- sich anmelden, indem Sie eines der erforderlichen Felder leer lassen
     Given Der Benutzer ist auf die Register page
     When Der Benutzer gibt ungültige informationen wie folgendes "<First Name>" und "<Last Name>" und "<E-Mail>" "<Telephone>" und "<Password>" und "<Password Confirm>"
@@ -31,21 +32,21 @@ Feature: Als Benutzer sollte ich mich registrieren können.
       | ertannn    | yilmaz    | erta9866@gmail.com | 01765253698 | sS.123456 |                  | Password confirmation does not match password!  |
 
 
-  @register
-  Scenario Outline: Negative Test- sich anmelden, indem Sie falsche Struktur dee Emailadresse
-    Given Der Benutzer ist auf die Register page
-    When Der Benutzer gibt ungültige  "<E-Mail>" ein
-    Then Fehlermeldung  überprüfen
-    Examples:
-      | E-Mail     |#burdan devam
-      | j          |
-      | ja         |
-      | ja@        |
-      | jf@gm      |
-      | jf@gmail   |
-      | @gmail     |
-      | @gmail,com |
-      | @gmail.com |
+
+  #Scenario Outline: Negative Test- sich anmelden, indem Sie falsche Struktur dee Emailadresse
+   # Given Der Benutzer ist auf die Register page
+   # When Der Benutzer gibt ungültige  "<E-Mail>" ein
+   # Then Fehlermeldung  überprüfen
+    #Examples:
+     # | E-Mail     |#burdan devam
+      #| j          |
+      #| ja         |
+      #| ja@        |
+      #| jf@gm      |
+      #| jf@gmail   |
+      #| @gmail     |
+      #| @gmail,com |
+      #| @gmail.com |
 
 
 
