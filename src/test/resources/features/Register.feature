@@ -14,7 +14,7 @@ Feature: Als Benutzer sollte ich mich registrieren können.
     Then Überprüft, dass der Benutzer sich  registrieren kann
     Examples:
       | First Name | Last Name | E-Mail               | Telephone   | Password  | Password Confirm |
-      | ertannnn    | yilmaz    | ertnan9866@gmail.com | 01765253698 | sS.123456 | sS.123456        |
+      | ertannnn    | yilmaz    | tertnan9866@gmail.com | 01765253698 | sS.123456 | sS.123456        |
 
 
 
