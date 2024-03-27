@@ -1,6 +1,9 @@
 package com.dg_markt.pages;
 
 import com.dg_markt.utilities.BrowserUtils;
+import com.dg_markt.utilities.Driver;
+import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -25,6 +28,9 @@ public class RegisterPage extends BasePage{
     public WebElement checkbox;
     @FindBy(tagName = "h1")
     public WebElement createdMessage;
+    @FindBy(css = "[class='text-danger']")
+    public WebElement errorMessage;
+
 
 
     public void listAusfüllen(String firstName,String lastName,String emailAdresse,String telefonnummer,
@@ -46,34 +52,11 @@ public class RegisterPage extends BasePage{
         continueBtn.click();
 
     }
-    public String getDisapperingWarningMessage(String message){
-        String  actualMessage=null;
-        if (message.contains("First")){
-            actualMessage=firstNameinput.getAttribute("validationMessage");
-            System.out.println(actualMessage);
-        }else if(message.contains("Last")){
-            actualMessage=lastNameInput.getText();
-            System.out.println(actualMessage);
-        }
-        if (message.contains("Mail")){
-            actualMessage=emailInput.getAttribute("validationMessage");
-            System.out.println(actualMessage);
-        }else if(message.contains("Telephone")){
-            actualMessage=telefonnummerInput.getText();
-            System.out.println(actualMessage);
-        }
-        else if(message.contains("Password")){
-            actualMessage=passwordInput.getText();
-            System.out.println(actualMessage);
-        }
-        else if(message.contains("Password")||message.contains("match")){
-            actualMessage=passwordConfirmInput.getText();
-            System.out.println(actualMessage);
-        }
 
 
-        return actualMessage;
+
+
 
     }
 
-}
+

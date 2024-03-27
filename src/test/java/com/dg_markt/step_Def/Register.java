@@ -50,16 +50,17 @@ public class Register {
         Assert.assertEquals(expectedMessage,actualMesssage);
     }
 
-    @Then("Fehlermeldung  überprüfen")
-    public void fehlermeldungÜberprüfen(String expectedFehlermeldung) {
-        String actualFehlermeldung=registerPage.getDisapperingWarningMessage(expectedFehlermeldung);
-        System.out.println("actualFehlermeldung = " + actualFehlermeldung);
-        System.out.println("expectedFehlermeldung = " + expectedFehlermeldung);
-        Assert.assertEquals(expectedFehlermeldung,actualFehlermeldung);
-    }
 
-    @When("Der Benutzer gibt ungültige informationen wie folgendes {string} und {string} und {string} {string} und {string} und {string} und {string}")
+
+    @When("Der Benutzer gibt ungültige informationen wie folgendes {string} und {string} und {string} {string} und {string} und {string}")
     public void derBenutzerGibtUngültigeInformationenWieFolgendesUndUndUndUndUnd(String firstName , String lastName , String eMail , String telephone , String password , String passwordConfirm) {
  registerPage.listAusfüllen(firstName,lastName,eMail,telephone,password,passwordConfirm);
+    }
+    @Then("Fehlermeldung  überprüfen {string}")
+    public void fehlermeldungÜberprüfen(String expectedFehlermeldung) {
+         String actualErrorMessage = registerPage.errorMessage.getText();
+        System.out.println("actualErrorMessage = " + actualErrorMessage);
+        System.out.println("expectedFehlermeldung = " + expectedFehlermeldung);
+        Assert.assertEquals(expectedFehlermeldung,actualErrorMessage);
     }
 }
