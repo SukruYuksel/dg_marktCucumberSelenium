@@ -1,7 +1,7 @@
 @register
 Feature: Als Benutzer sollte ich mich registrieren können.
 
-
+@register1
   Scenario: Negative Test- Mit dem leeren Formular registieren
     Given Der Benutzer ist auf die Register page
     When Der Benutzer klick continue, ohne die Pfilichtfelder auszufüllen
