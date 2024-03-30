@@ -1,13 +1,13 @@
 @register
 Feature: Als Benutzer sollte ich mich registrieren können.
 
-@register1
+
   Scenario: Negative Test- Mit dem leeren Formular registieren
     Given Der Benutzer ist auf die Register page
     When Der Benutzer klick continue, ohne die Pfilichtfelder auszufüllen
     Then Überprüft, dass der Benutzer sich nicht registrieren kann
 
-
+@register1
   Scenario Outline: Positive Test- Pflichter Felder ausfüllen
     Given Der Benutzer ist auf die Register page
     When Der Benutzer gibt gültige informationen wie folgendes "<First Name>" und "<Last Name>" und "<E-Mail>" "<Telephone>" und "<Password>" und "<Password Confirm>"
