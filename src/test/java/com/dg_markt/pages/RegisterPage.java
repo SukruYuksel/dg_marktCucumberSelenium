@@ -28,8 +28,13 @@ public class RegisterPage extends BasePage{
     public WebElement checkbox;
     @FindBy(tagName = "h1")
     public WebElement createdMessage;
+    @FindBy(xpath = "//*[.='E-Mail Address does not appear to be valid!']")
+    public WebElement emailErrorMessage;
     @FindBy(css = "[class='text-danger']")
     public WebElement errorMessage;
+    @FindBy(css = "[class='alert alert-danger alert-dismissible']")
+    public WebElement emailAlreadyMessage;;
+
 
 
 
@@ -50,6 +55,20 @@ public class RegisterPage extends BasePage{
         checkbox.click();
         BrowserUtils.waitForClickablility(continueBtn,2);
         continueBtn.click();
+
+    }
+
+    public String getDisapperingWarningMessage(String message){
+        String  actualMessage=null;
+        if (message.contains("@")||message.contains("Gib")){
+            actualMessage=emailInput.getAttribute("validationMessage");
+            System.out.println(actualMessage);
+        }else if(message.contains("does")){
+            actualMessage=emailErrorMessage.getText();
+            System.out.println(actualMessage);
+        }
+
+        return actualMessage;
 
     }
 

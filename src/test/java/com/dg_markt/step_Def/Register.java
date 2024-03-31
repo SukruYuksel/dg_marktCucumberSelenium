@@ -63,4 +63,31 @@ public class Register {
         System.out.println("expectedFehlermeldung = " + expectedFehlermeldung);
         Assert.assertEquals(expectedFehlermeldung,actualErrorMessage);
     }
+
+
+
+
+
+
+    @Then("Uberpruft ungultige Email Daten und {string}")
+    public void uberpruftUngultigeEmailDatenUnd(String arg0) {
+    }
+
+    @Then("Verify Fehlermeldung {string}")
+    public void verifyFehlermeldung(String fehlermeldung) {
+        System.out.println("fehlermeldung = " + fehlermeldung);
+        String actualMessage = registerPage.getDisapperingWarningMessage(fehlermeldung);
+        Assert.assertTrue(actualMessage.contains(fehlermeldung));
+    }
+
+    @Then("Fehlermeldung allready registered message  überprüfen {string}")
+    public void fehlermeldungAllreadyRegisteredMessageÜberprüfen(String fehlermeldung) {
+        System.out.println("fehlermeldung = " + fehlermeldung);
+
+
+        String actualMessage=registerPage.emailAlreadyMessage.getText();
+        System.out.println("actualMessage = " + actualMessage);
+
+
+    }
 }
