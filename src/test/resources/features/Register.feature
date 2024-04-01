@@ -1,4 +1,4 @@
-@wip
+
 Feature: Als Benutzer sollte ich mich registrieren können.
 
 
@@ -7,7 +7,7 @@ Feature: Als Benutzer sollte ich mich registrieren können.
     When Der Benutzer klick continue, ohne die Pfilichtfelder auszufüllen
     Then Überprüft, dass der Benutzer sich nicht registrieren kann
 
-
+  @wip
   Scenario Outline: Positive Test- Pflichter Felder ausfüllen
     Given Der Benutzer ist auf die Register page
     When Der Benutzer gibt gültige informationen wie folgendes "<First Name>" und "<Last Name>" und "<E-Mail>" "<Telephone>" und "<Password>" und "<Password Confirm>"
