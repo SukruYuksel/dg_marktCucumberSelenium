@@ -16,7 +16,7 @@ Feature: Als Benutzer sollte ich mich registrieren können.
       | First Name | Last Name | E-Mail                | Telephone   | Password | Password Confirm |
       | ertannnn   | yilmaz    | tatnnnln9866@gmail.com | 01765253698 | 12345    | 12345            |
 
-
+@regression
   Scenario Outline: Negative Test- sich anmelden, indem Sie eines der erforderlichen Felder leer lassen
     Given Der Benutzer ist auf die Register page
     When Der Benutzer gibt ungültige informationen wie folgendes "<First Name>" und "<Last Name>" und "<E-Mail>" "<Telephone>" und "<Password>" und "<Password Confirm>"
