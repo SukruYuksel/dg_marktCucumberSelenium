@@ -16,6 +16,9 @@ public class LoginPage extends BasePage{
     @FindBy(xpath= "//ul/li[.='Account']")
     public WebElement LoginPageAccount;
 
+    @FindBy( xpath = "//*[@id='account-login']/div[1]")
+    public WebElement loginFehlermeldung;
+
     public void login(String emailAdresse,String password){
         emailAdreesInput.sendKeys(emailAdresse);
         passwordInput.sendKeys(password);
