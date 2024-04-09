@@ -1,5 +1,5 @@
 
-Feature: Als Benutzer sollte ich mich registrieren können.
+Feature: Als Benutzer sollte ich mich registrieren.
 
 
   Scenario: Negative Test- Mit dem leeren Formular registieren

@@ -16,19 +16,25 @@ public class LoginPanel extends BasePage{
     @FindBy(xpath = "//input[@name='login']")
     public WebElement lognPanelLoginBtn;
 
-    public void vorlogin(){
+
+
+    public void vorlogin(int menuTur){
+        //menuTur=1 Register
+        //menuTur=2 Login
         Driver.get().get(ConfigurationReader.get("url"));
         lognPanelEmail.sendKeys("ders@dgmarkt.com");
         BrowserUtils.waitFor(5);
         lognPanelPassword.sendKeys("2574dGlogin");
         BrowserUtils.waitFor(5);
         lognPanelLoginBtn.click();
+        if (menuTur==1){
+            Driver.get().get(ConfigurationReader.get("urlRegisterPage"));
+        }
+       else if(menuTur==2){
+            Driver.get().get(ConfigurationReader.get("urlLoginPage"));
 
-
-        Driver.get().get(ConfigurationReader.get("url1"));
-       // register.click();
+        }
     }
-
 
 
 }

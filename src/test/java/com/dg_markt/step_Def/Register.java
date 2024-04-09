@@ -20,7 +20,7 @@ public class Register {
 
     @Given("Der Benutzer ist auf die Register page")
     public void der_benutzer_ist_auf_die_register_page() {
-     loginPanel.vorlogin();
+     loginPanel.vorlogin(1);
 
 
     }
