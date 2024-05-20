@@ -6,7 +6,6 @@ pipeline {
     }
     options {
         timestamps()
-        ansiColor('gnome-terminal')
         buildDiscarder(logRotator(numToKeepStr: '10'))
     }
 
@@ -21,15 +20,19 @@ pipeline {
     stages {
         stage('Initialize') {
             steps {
-                sh '''
-                    echo "PATH = ${PATH}"
-                    echo "M2_HOME = ${M2_HOME}"
-                '''
+                wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'gnome-terminal']) {
+                    sh '''
+                        echo "PATH = ${PATH}"
+                        echo "M2_HOME = ${M2_HOME}"
+                    '''
+                }
             }
         }
         stage('Build') {
             steps {
-                sh "mvn -f pom.xml -B -DskipTests clean package"
+                wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'gnome-terminal']) {
+                    sh "mvn -f pom.xml -B -DskipTests clean package"
+                }
             }
             post {
                 success {
@@ -39,8 +42,10 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh "mvn -f pom.xml test"
-                sh "mvn clean verify -Dcucumber.filter.tags='${params.TagName}' -DfailIfNoTests=false"
+                wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'gnome-terminal']) {
+                    sh "mvn -f pom.xml test"
+                    sh "mvn clean verify -Dcucumber.filter.tags='${params.TagName}' -DfailIfNoTests=false"
+                }
             }
             post {
                 always {
@@ -51,9 +56,11 @@ pipeline {
         }
         stage('Cucumber Report') {
             steps {
-                cucumber buildStatus: "UNSTABLE",
-                         fileIncludePattern: "**/cucumber.json",
-                         jsonReportDirectory: "target"
+                wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'gnome-terminal']) {
+                    cucumber buildStatus: "UNSTABLE",
+                             fileIncludePattern: "**/cucumber.json",
+                             jsonReportDirectory: "target"
+                }
             }
         }
     }
