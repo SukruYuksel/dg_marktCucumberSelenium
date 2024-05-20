@@ -20,18 +20,22 @@ pipeline {
     stages {
         stage('Initialize') {
             steps {
-                wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'gnome-terminal']) {
-                    sh '''
-                        echo "PATH = ${PATH}"
-                        echo "M2_HOME = ${M2_HOME}"
-                    '''
+                script {
+                    wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'xterm']) {
+                        sh '''
+                            echo "PATH = ${PATH}"
+                            echo "M2_HOME = ${M2_HOME}"
+                        '''
+                    }
                 }
             }
         }
         stage('Build') {
             steps {
-                wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'gnome-terminal']) {
-                    sh "mvn -f pom.xml -B -DskipTests clean package"
+                script {
+                    wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'xterm']) {
+                        sh "mvn -f pom.xml -B -DskipTests clean package"
+                    }
                 }
             }
             post {
@@ -42,9 +46,11 @@ pipeline {
         }
         stage('Test') {
             steps {
-                wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'gnome-terminal']) {
-                    sh "mvn -f pom.xml test"
-                    sh "mvn clean verify -Dcucumber.filter.tags='${params.TagName}' -DfailIfNoTests=false"
+                script {
+                    wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'xterm']) {
+                        sh "mvn -f pom.xml test"
+                        sh "mvn clean verify -Dcucumber.filter.tags='${params.TagName}' -DfailIfNoTests=false"
+                    }
                 }
             }
             post {
@@ -56,10 +62,12 @@ pipeline {
         }
         stage('Cucumber Report') {
             steps {
-                wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'gnome-terminal']) {
-                    cucumber buildStatus: "UNSTABLE",
-                             fileIncludePattern: "**/cucumber.json",
-                             jsonReportDirectory: "target"
+                script {
+                    wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'xterm']) {
+                        cucumber buildStatus: "UNSTABLE",
+                                 fileIncludePattern: "**/cucumber.json",
+                                 jsonReportDirectory: "target"
+                    }
                 }
             }
         }
