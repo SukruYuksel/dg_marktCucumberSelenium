@@ -5,8 +5,8 @@ pipeline {
         jdk 'JDK'
     }
     options {
-        timestamps ()
-        ansiColor('xterm')
+        timestamps()
+        ansiColor('gnome-terminal')
         buildDiscarder(logRotator(numToKeepStr: '10'))
     }
 
@@ -15,8 +15,7 @@ pipeline {
     }
 
     parameters {
-        string(name: 'TagName', defaultValue: "@employee", description: 'Scenario Tag to be run',)
-        chose(name: 'Broser', choices: 'brwsr1.tersSlash.brwsr2', description: 'Select browser')
+        string(name: 'TagName', defaultValue: "@employee", description: 'Scenario Tag to be run')
     }
 
     stages {
@@ -34,7 +33,6 @@ pipeline {
             }
             post {
                 success {
-//                     echo "Now Archiving the Artifacts....."
                     archiveArtifacts artifacts: '**/*.jar'
                 }
             }
@@ -42,21 +40,20 @@ pipeline {
         stage('Test') {
             steps {
                 sh "mvn -f pom.xml test"
-                sh "mvn clean verify -Dcucumber.filter.tags='$params.TagName' -DfailIfNoTests=false"
-                // sh "mvn clean verify -Dbrowser=chrome-headless -Dcucumber.filter.tags='$params.TagName' -DfailIfNoTests=false"
+                sh "mvn clean verify -Dcucumber.filter.tags='${params.TagName}' -DfailIfNoTests=false"
             }
-//             post {
-//                 always {
-//                     junit 'Cucumber-Mvn-Project/target/surefire-reports/*.xml'
-//                     html 'target/cucumber-report.html'
-//                 }
-//             }
+            post {
+                always {
+                    junit 'target/surefire-reports/*.xml'
+                    archiveArtifacts artifacts: 'target/cucumber-report.html'
+                }
+            }
         }
         stage('Cucumber Report') {
             steps {
                 cucumber buildStatus: "UNSTABLE",
-                    fileIncludePattern: "**/cucumber.json",
-                    jsonReportDirectory: "target"
+                         fileIncludePattern: "**/cucumber.json",
+                         jsonReportDirectory: "target"
             }
         }
     }
